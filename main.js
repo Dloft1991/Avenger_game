@@ -7,26 +7,46 @@ let wins = 0;
 let losses = 0;
 let maxGuesses = 10;
 let wrongLetters = [];
-let correctWord = [];
+let correctWord = '';
+
+const guessedElement = document.getElementById("maxGuesses");
+guessedElement.textContent = maxGuesses;
 
 var computerGuess = words[Math.floor(Math.random() * words.length)];
 console.log(computerGuess);
-var showComputerGuess = document.getElementById("computerGuess");
 
-for (i = 0; i > computerGuess; i++) {
-    document.getElementById("computerGuess").innerHTML += '_';
+for (i = 0; i > computerGuess.length; i++) {
+
+    document.getElementById("computerGuess").append += '_';
     console.log(computerGuess);
 }
 
-hiddenWord = computerGuess[Math.floor(Math.random() * computerGuess.length)];
 document.onkeyup = function(event) {
-    for(let i = 0; i > hiddenWord.length; i++) {
+       const userGuess = event.key;
 
-        userGuess = event.key;
-        if(userGuess === computerGuess){
-            document.getElementById("picks").append(userGuess);
+       
+
+        document.getElementById("picks").append(userGuess);
+        
+
+           if (computerGuess.indexOf(userGuess) > -1) {
+
+               if((userGuess === computerGuess) && (maxGuesses > 0)){
+                   correctWord = [];
+                   
+               }
+               
+               if((userGuess  != computerGuess) && (maxGuesses > 0)) {
+                   maxGuesses --;
+                   guessedElement.textContent = maxGuesses;
+                   console.log(maxGuesses);
+                   correctWord = '';
+                   document.getElementById("correctWord").append(userGuess);
+               }
+               
+           }
+           
+           
         }
-    }
-   
     
-}
+        
